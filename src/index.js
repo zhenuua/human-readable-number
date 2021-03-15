@@ -20,7 +20,7 @@ module.exports = function toReadable (number) {
         18: 'eighteen',
         19: 'nineteen'
     };
-    const tens = {
+    const teens = {
         20: 'twenty',
         30: 'thirty',
         40: 'forty',
@@ -30,11 +30,36 @@ module.exports = function toReadable (number) {
         80: 'eighty',
         90: 'ninety'
     }
+if (number === 0){
+        return "zero";
+    }
     if (number < 20){
         return numbersDirect[number]
-    } else {
-        (number < 20)
-         
+    } 
+    if (number < 100 && number % 10 === 0){
+      return teens[number]
+    } if (number % 100 === 0){
+      let findhundred = Math.floor(number / 100)
+      
+      return `${numbersDirect[findhundred]} hundred`
     }
-
-}
+  
+  if (number % 100 < 20){
+let findhundred = Math.floor(number / 100)
+      let findteens = number % 100
+      return `${numbersDirect[findhundred]} hundred ${numbersDirect[findteens]}`
+    }
+      if (number < 100){
+      let findteens = 10 * Math.floor(number / 10);
+      let findnumbers = number % 10;
+      return `${teens[findteens]} ${numbersDirect[findnumbers]}`
+    } else {
+  let findhundred = Math.floor(number / 100)
+  let findteens = Math.floor(number / 10);
+  findteens = 10 * (findteens % 10);
+  let findnumbers = number % 10;
+   if (findnumbers === 0){
+     return `${numbersDirect[findhundred]} hundred ${teens[findteens]}`
+   } else {
+  return `${numbersDirect[findhundred]} hundred ${teens[findteens]} ${numbersDirect[findnumbers]}`
+    }}}
